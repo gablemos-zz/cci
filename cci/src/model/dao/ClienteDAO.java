@@ -93,6 +93,28 @@ public class ClienteDAO {
         }
     }
     
+    //Método verifica se um cliente já consta no bd
+    public boolean verificarExistencia(String cpf){
+        con = ConnectionFactory.getConnection();
+        sql = "SELECT cpf FROM cliente WHERE cpf = ?";
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, cpf);
+            rs = stmt.executeQuery();            
+            return rs.first();
+            
+        } catch (SQLException ex) {
+            System.err.println("Erro: " + ex);
+            return false;
+        }finally{
+           ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+    }
+    
     //Método SELECT *
     public List<Cliente> buscarTodos(){        
         con = ConnectionFactory.getConnection();
@@ -131,26 +153,83 @@ public class ClienteDAO {
         return clientes;
     }
     
-    //Método verifica se um cliente já consta no bd
-    public boolean verificarExistencia(String cpf){
+
+    //Método buscar cliente especifico
+    public List<Cliente> buscarCPF(String cpf){        
         con = ConnectionFactory.getConnection();
-        sql = "SELECT cpf FROM cliente WHERE cpf = ?";
-        
+        sql = "SELECT * FROM cliente c INNER JOIN endereco e ON e.cep = c.endereco_cep WHERE c.cpf = ?;";
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        
+        List<Cliente> clientes = new ArrayList<>();
         
         try {
             stmt = con.prepareStatement(sql);
             stmt.setString(1, cpf);
-            rs = stmt.executeQuery();            
-            return rs.first();
-            
+            rs = stmt.executeQuery();
+            while (rs.next()) {                
+                Endereco endereco = new Endereco(
+                        rs.getString("cep"), 
+                        rs.getString("uf"), 
+                        rs.getString("cidade"), 
+                        rs.getString("bairro"), 
+                        rs.getString("rua"));
+                
+                
+                Cliente cliente = new Cliente(
+                        rs.getString("cpf"),
+                        rs.getString("nome"),
+                        rs.getString("telefone"),
+                        rs.getString("email"), 
+                        endereco);
+                
+                clientes.add(cliente);
+            }
         } catch (SQLException ex) {
             System.err.println("Erro: " + ex);
-            return false;
         }finally{
            ConnectionFactory.closeConnection(con, stmt, rs);
-        }
+        }        
+        return clientes;
+    }  
+    
+    //Método buscar clientes pelo nome
+    public List<Cliente> buscarNome(String nome){        
+        con = ConnectionFactory.getConnection();
+        sql = "SELECT * FROM cliente c INNER JOIN endereco e ON e.cep = c.endereco_cep WHERE c.nome LIKE ?;";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Cliente> clientes = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, "%"+nome+"%");
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {                
+                Endereco endereco = new Endereco(
+                        rs.getString("cep"), 
+                        rs.getString("uf"), 
+                        rs.getString("cidade"), 
+                        rs.getString("bairro"), 
+                        rs.getString("rua"));
+                
+                
+                Cliente cliente = new Cliente(
+                        rs.getString("cpf"),
+                        rs.getString("nome"),
+                        rs.getString("telefone"),
+                        rs.getString("email"), 
+                        endereco);
+                
+                clientes.add(cliente);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro: " + ex);
+        }finally{
+           ConnectionFactory.closeConnection(con, stmt, rs);
+        }        
+        return clientes;
     }
-    //Método buscar endereço especifico
 }

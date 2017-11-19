@@ -5,7 +5,7 @@
  */
 package model.dao;
 
-import model.bean.Cliente;
+import model.bean.Funcionario;
 import model.bean.Endereco;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -15,9 +15,9 @@ import org.junit.Ignore;
  *
  * @author gabri
  */
-public class ClienteDAOTest {
+public class FuncionarioDAOTest {
     
-    public ClienteDAOTest() {
+    public FuncionarioDAOTest() {
     }
 
     @Test
@@ -25,16 +25,17 @@ public class ClienteDAOTest {
     public void inserir() {
         Endereco endereco = new Endereco();
         endereco.setCep("11111111");
-        Cliente cliente =  new Cliente(
-                "222.222.222-22", 
+        Funcionario funcionario =  new Funcionario(
+                "222.222.222-20", 
                 "Gabriel Lemos", 
                 "(12)98216-2512", 
                 "gabriel@google.com", 
+                "Técnico",
                 endereco);
         
-        ClienteDAO dao = new ClienteDAO();
+        FuncionarioDAO dao = new FuncionarioDAO();
         
-        if(dao.salvar(cliente)){
+        if(dao.salvar(funcionario)){
             System.out.println("Inserido com sucesso");
         }else{
             fail("Erro ao inserir");
@@ -44,8 +45,8 @@ public class ClienteDAOTest {
     @Test
     @Ignore
     public void existeCPF(){
-        ClienteDAO dao = new ClienteDAO();
-        String cpf = "111.222.333-44";
+        FuncionarioDAO dao = new FuncionarioDAO();
+        String cpf = "222.222.222-22";
         if(dao.verificarExistencia(cpf)){
             System.out.println("CEP Existente");
         }else{
@@ -58,19 +59,20 @@ public class ClienteDAOTest {
     public void alterar(){
         Endereco endereco = new Endereco();
         endereco.setCep("11111111");
-        Cliente cliente =  new Cliente(
-                "111.222.333-44", 
+        Funcionario funcionario =  new Funcionario(
+                "222.222.222-22", 
                 "Rafaela Elias Lemos", 
                 "(12)98216-2512", 
                 "gabriel@google.com", 
+                "Técnico",
                 endereco);
         
-        ClienteDAO dao = new ClienteDAO();
+        FuncionarioDAO dao = new FuncionarioDAO();
         
-        if(dao.alterar(cliente)){
-            System.out.println("Inserido com sucesso");
+        if(dao.alterar(funcionario)){
+            System.out.println("Alterado com sucesso");
         }else{
-            fail("Erro ao inserir");
+            fail("Erro ao Alterar");
         }  
     }
     
@@ -78,12 +80,12 @@ public class ClienteDAOTest {
     @Ignore
     public void deletar() {
 
-        Cliente cliente = new Cliente();
-        cliente.setCpf("111.111.111-11");
+        Funcionario funcionario = new Funcionario();
+        funcionario.setCpf("222.222.222-22");
 
-        ClienteDAO dao = new ClienteDAO();
+        FuncionarioDAO dao = new FuncionarioDAO();
 
-        if (dao.apagar(cliente)) {
+        if (dao.apagar(funcionario)) {
             System.out.println("Apagado com sucesso");
         } else {
             fail("Erro ao Apagar");
@@ -93,14 +95,15 @@ public class ClienteDAOTest {
     @Test
     @Ignore
     public void buscarTodos(){
-        ClienteDAO dao = new ClienteDAO();
+        FuncionarioDAO dao = new FuncionarioDAO();
         
-        for(Cliente c: dao.buscarTodos()){
+        for(Funcionario c: dao.buscarTodos()){
             System.out.println(
                     "CPF: " + c.getCpf() +
                     "\nNome: "+ c.getNome() +
                     "\nTelefone"+c.getTelefone()+
                     "\nE-mail"+c.getEmail()+
+                    "\nCargo: "+c.getCargo()+        
                     "\nCEP"+c.getEndereco().getCep()+
                     "\nUF"+c.getEndereco().getUf()+
                     "\nCidade"+c.getEndereco().getCidade()+
@@ -113,14 +116,15 @@ public class ClienteDAOTest {
     @Test
     @Ignore
     public void buscarPorCPF(){
-        ClienteDAO dao = new ClienteDAO();
-        String cpf = "111.222.333-44";
-        for(Cliente c: dao.buscarCPF(cpf)){
+        FuncionarioDAO dao = new FuncionarioDAO();
+        String cpf = "222.222.222-20";
+        for(Funcionario c: dao.buscarCPF(cpf)){
             System.out.println(
                     "CPF: " + c.getCpf() +
                     "\nNome: "+ c.getNome() +
                     "\nTelefone"+c.getTelefone()+
                     "\nE-mail"+c.getEmail()+
+                    "\nCargo: "+c.getCargo()+        
                     "\nCEP"+c.getEndereco().getCep()+
                     "\nUF"+c.getEndereco().getUf()+
                     "\nCidade"+c.getEndereco().getCidade()+
@@ -133,22 +137,22 @@ public class ClienteDAOTest {
     @Test
     @Ignore
     public void buscarPorNome(){
-        ClienteDAO dao = new ClienteDAO();
-        String nome = "Elias";
-        for(Cliente c: dao.buscarNome(nome)){
+        FuncionarioDAO dao = new FuncionarioDAO();
+        String nome = "Lem";
+        for(Funcionario c: dao.buscarNome(nome)){
             System.out.println(
-                    "CPF: " + c.getCpf() +
+                   "CPF: " + c.getCpf() +
                     "\nNome: "+ c.getNome() +
-                    "\nTelefone: "+c.getTelefone()+
-                    "\nE-mail: "+c.getEmail()+
-                    "\nCEP: "+c.getEndereco().getCep()+
-                    "\nUF: "+c.getEndereco().getUf()+
-                    "\nCidade: "+c.getEndereco().getCidade()+
-                    "\nBairro: "+c.getEndereco().getBairro()+
-                    "\nRua: "+c.getEndereco().getRua()+
+                    "\nTelefone"+c.getTelefone()+
+                    "\nE-mail"+c.getEmail()+
+                    "\nCargo: "+c.getCargo()+        
+                    "\nCEP"+c.getEndereco().getCep()+
+                    "\nUF"+c.getEndereco().getUf()+
+                    "\nCidade"+c.getEndereco().getCidade()+
+                    "\nBairro"+c.getEndereco().getBairro()+
+                    "\nRua"+c.getEndereco().getRua()+
                     "\n--------------------------------------");
         }
     }
     
-
 }

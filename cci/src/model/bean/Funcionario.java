@@ -12,18 +12,18 @@ package model.bean;
 public class Funcionario {
    private String cpf; 
    private String nome;
-   private String tel;
+   private String telefone;
    private String email;
    private String cargo;
    private Endereco endereco;
 
     public Funcionario() {
     }
-
-    public Funcionario(String cpf, String nome, String tel, String email, String cargo, Endereco endereco) {
+    
+    public Funcionario(String cpf, String nome, String telefone, String email, String cargo, Endereco endereco) {
         this.cpf = cpf;
         this.nome = nome;
-        this.tel = tel;
+        this.telefone = telefone;
         this.email = email;
         this.cargo = cargo;
         this.endereco = endereco;
@@ -45,12 +45,12 @@ public class Funcionario {
         this.nome = nome;
     }
 
-    public String getTel() {
-        return tel;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getEmail() {

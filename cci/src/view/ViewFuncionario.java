@@ -11,71 +11,74 @@ import controller.ViaCEPException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import model.bean.Cliente;
+import model.bean.Funcionario;
 import model.bean.Endereco;
-import model.dao.ClienteDAO;
+import model.dao.FuncionarioDAO;
 import model.dao.EnderecoDAO;
 
 /**
  *
  * @author gabri
  */
-public class ViewCliente extends javax.swing.JFrame {
+public class ViewFuncionario extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewCliente
+     * Creates new form ViewFuncionario
      */
-    public ViewCliente() {
+    public ViewFuncionario() {
         initComponents();
         
-        DefaultTableModel modelo = (DefaultTableModel) jtClientes.getModel();
-        jtClientes.setRowSorter(new TableRowSorter(modelo));
+        DefaultTableModel modelo = (DefaultTableModel) jtFuncionarios.getModel();
+        jtFuncionarios.setRowSorter(new TableRowSorter(modelo));
         
         readJTable();
     }
     
     public void readJTable(){
-        DefaultTableModel modelo = (DefaultTableModel) jtClientes.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jtFuncionarios.getModel();
         modelo.setNumRows(0);
-        ClienteDAO dao = new ClienteDAO();
+        FuncionarioDAO dao = new FuncionarioDAO();
         
-        for(Cliente c: dao.buscarTodos()){
+        for(Funcionario f: dao.buscarTodos()){
             modelo.addRow(new Object[]{
-                c.getCpf(),
-                c.getNome(),
-                c.getTelefone(),
-                c.getEndereco().getCep()});
+                f.getCpf(),
+                f.getNome(),
+                f.getTelefone(),
+                f.getCargo(),
+                f.getEndereco().getCep()});
         }
     }
+    
     public void readJTableCPF(String cpf){
-        DefaultTableModel modelo = (DefaultTableModel) jtClientes.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jtFuncionarios.getModel();
         modelo.setNumRows(0);
-        ClienteDAO dao = new ClienteDAO();
+        FuncionarioDAO dao = new FuncionarioDAO();
         
-        for(Cliente c: dao.buscarCPF(cpf)){
+        for(Funcionario f: dao.buscarCPF(cpf)){
             modelo.addRow(new Object[]{
-                c.getCpf(),
-                c.getNome(),
-                c.getTelefone(),
-                c.getEndereco().getCep()});
+                f.getCpf(),
+                f.getNome(),
+                f.getTelefone(),
+                f.getCargo(),
+                f.getEndereco().getCep()});
         }
     }
+    
     public void readJTableNome(String nome){
-        DefaultTableModel modelo = (DefaultTableModel) jtClientes.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jtFuncionarios.getModel();
         modelo.setNumRows(0);
-        ClienteDAO dao = new ClienteDAO();
+        FuncionarioDAO dao = new FuncionarioDAO();
         
-        for(Cliente c: dao.buscarNome(nome)){
+        for(Funcionario f: dao.buscarNome(nome)){
             modelo.addRow(new Object[]{
-                c.getCpf(),
-                c.getNome(),
-                c.getTelefone(),
-                c.getEndereco().getCep()});
+                f.getCpf(),
+                f.getNome(),
+                f.getTelefone(),
+                f.getCargo(),
+                f.getEndereco().getCep()});
         }
     }
     
-    
-
     public boolean validarPreenchimento() {
         if (txtCPF.getText().isEmpty()
                 || txtNome.getText().isEmpty()
@@ -145,9 +148,11 @@ public class ViewCliente extends javax.swing.JFrame {
         btnBuscarCEP = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        cmbxCargo = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtClientes = new javax.swing.JTable();
+        jtFuncionarios = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         txtPesquisarCPF = new javax.swing.JFormattedTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -163,21 +168,21 @@ public class ViewCliente extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Cliente");
+        jLabel2.setText("Funcionário");
 
         jLabel1.setBackground(new java.awt.Color(153, 255, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Cliente_90px.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Funcionario_90px.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -262,6 +267,10 @@ public class ViewCliente extends javax.swing.JFrame {
 
         txtCidade.setEnabled(false);
 
+        jLabel14.setText("Cargo");
+
+        cmbxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Atendente", "Técnico" }));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -269,7 +278,15 @@ public class ViewCliente extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbxCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNome)
+                    .addComponent(txtCPF)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalvar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(txtCEP)
                         .addGap(18, 18, 18)
@@ -281,22 +298,9 @@ public class ViewCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCidade))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExcluir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSalvar))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel9)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(119, 119, 119)
-                                .addComponent(jLabel12))
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
@@ -304,9 +308,16 @@ public class ViewCliente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtCPF))
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel9)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(119, 119, 119)
+                                .addComponent(jLabel12))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -329,6 +340,10 @@ public class ViewCliente extends javax.swing.JFrame {
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -355,25 +370,25 @@ public class ViewCliente extends javax.swing.JFrame {
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir)
                     .addComponent(btnNovo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        jtClientes.setModel(new javax.swing.table.DefaultTableModel(
+        jtFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CPF", "NOME", "TELEFONE", "CEP"
+                "CPF", "NOME", "TELEFONE", "CARGO", "CEP"
             }
         ));
-        jtClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtClientesMouseClicked(evt);
+                jtFuncionariosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtClientes);
+        jScrollPane1.setViewportView(jtFuncionarios);
 
-        jLabel5.setText("Procurar Cliente por CPF");
+        jLabel5.setText("Procurar Funcionário por CPF");
 
         try {
             txtPesquisarCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -381,7 +396,7 @@ public class ViewCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jLabel13.setText("Procurar Cliente por Nome");
+        jLabel13.setText("Procurar Funcionário por Nome");
 
         txtPesquisarNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -513,17 +528,17 @@ public class ViewCliente extends javax.swing.JFrame {
     Verifica se o cep já está cadastrado, caso esteja não faz nada
     Caso não esteja ele cadastra o endereço no bd!!
     Caso o cep já exista usar esse valor de cep e cadastrar
-    só o cliente
+    só o funcionario
     Caso não exista cadastrar primeiro o endereco no banco e depois usar
-    o cep no cadastro do cliente
+    o cep no cadastro do funcionario
      */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
         if (validarPreenchimento()) {
 
-            ClienteDAO cdao = new ClienteDAO();
+            FuncionarioDAO fdao = new FuncionarioDAO();
             String cpf = txtCPF.getText();
-            boolean existeCli = cdao.verificarExistencia(cpf);
+            boolean existeCli = fdao.verificarExistencia(cpf);
 
             EnderecoDAO edao = new EnderecoDAO();
             String cep = txtCEP.getText().replace(".", "").replace("-", "");
@@ -536,32 +551,33 @@ public class ViewCliente extends javax.swing.JFrame {
                     txtBairro.getText(),
                     txtRua.getText());
 
-            Cliente cliente = new Cliente(
+            Funcionario funcionario = new Funcionario(
                     txtCPF.getText(),
                     txtNome.getText(),
                     txtTelefone.getText(),
                     txtEmail.getText(),
+                    cmbxCargo.getSelectedItem().toString(),
                     endereco);
 
             if (existeCli) {
                 int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja alterar este cadastro?", "ALTERAR", JOptionPane.YES_NO_OPTION);
 
                 if (resposta == JOptionPane.YES_OPTION) {
-                    cdao.alterar(cliente);                    
+                    fdao.alterar(funcionario);                    
                     readJTable();
                     JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
                     limparCampos();
                 }
             } else if (existeEnd) {
-                cdao.salvar(cliente);
+                fdao.salvar(funcionario);
                 readJTable();
-                JOptionPane.showMessageDialog(null, "Cadastro cliente salvo com sucesso");
+                JOptionPane.showMessageDialog(null, "Cadastro funcionario salvo com sucesso");
                 limparCampos();
             } else {
                 edao.salvar(endereco);
-                cdao.salvar(cliente);
+                fdao.salvar(funcionario);
                 readJTable();
-                JOptionPane.showMessageDialog(null, "Cadastro endereço e cliente salvo com sucesso");
+                JOptionPane.showMessageDialog(null, "Cadastro endereço e funcionario salvo com sucesso");
                 limparCampos();
             }
 
@@ -577,18 +593,18 @@ public class ViewCliente extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (validarPreenchimento()) {
 
-            ClienteDAO cdao = new ClienteDAO();
+            FuncionarioDAO fdao = new FuncionarioDAO();
             String cpf = txtCPF.getText();
-            boolean existeCli = cdao.verificarExistencia(cpf);
+            boolean existeCli = fdao.verificarExistencia(cpf);
 
-            Cliente cliente = new Cliente();
-            cliente.setCpf(cpf);
+            Funcionario funcionario = new Funcionario();
+            funcionario.setCpf(cpf);
 
             if (existeCli) {
                 int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este cadastro?", "EXCLUIR", JOptionPane.YES_NO_OPTION);
 
                 if (resposta == JOptionPane.YES_OPTION) {
-                    cdao.apagar(cliente);
+                    fdao.apagar(funcionario);
                     readJTable();
                     limparCampos();
                     JOptionPane.showMessageDialog(null, "Excluido com sucesso");
@@ -602,12 +618,12 @@ public class ViewCliente extends javax.swing.JFrame {
         readJTableCPF(txtPesquisarCPF.getText());
     }//GEN-LAST:event_btnBuscarCPFActionPerformed
 
-    private void jtClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtClientesMouseClicked
-        if (jtClientes.getSelectedRow() != -1) {
+    private void jtFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtFuncionariosMouseClicked
+        if (jtFuncionarios.getSelectedRow() != -1) {
             
-            ClienteDAO dao = new ClienteDAO();
+            FuncionarioDAO dao = new FuncionarioDAO();
             
-            for (Cliente c : dao.buscarCPF(jtClientes.getValueAt(jtClientes.getSelectedRow(), 0).toString())) {
+            for (Funcionario c : dao.buscarCPF(jtFuncionarios.getValueAt(jtFuncionarios.getSelectedRow(), 0).toString())) {
                         txtCPF.setText(c.getCpf());
                         txtNome.setText(c.getNome());
                         txtTelefone.setText(c.getTelefone());
@@ -620,7 +636,7 @@ public class ViewCliente extends javax.swing.JFrame {
                 
             }
         }
-    }//GEN-LAST:event_jtClientesMouseClicked
+    }//GEN-LAST:event_jtFuncionariosMouseClicked
 
     private void txtPesquisarNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarNomeKeyPressed
         readJTableNome(txtPesquisarNome.getText());
@@ -648,27 +664,28 @@ public class ViewCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewCliente.class
+            java.util.logging.Logger.getLogger(ViewFuncionario.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewCliente.class
+            java.util.logging.Logger.getLogger(ViewFuncionario.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewCliente.class
+            java.util.logging.Logger.getLogger(ViewFuncionario.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewCliente.class
+            java.util.logging.Logger.getLogger(ViewFuncionario.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewCliente().setVisible(true);
+                new ViewFuncionario().setVisible(true);
             }
         });
     }
@@ -679,11 +696,13 @@ public class ViewCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cmbxCargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -697,7 +716,7 @@ public class ViewCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtClientes;
+    private javax.swing.JTable jtFuncionarios;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCEP;
     private javax.swing.JFormattedTextField txtCPF;
