@@ -10,20 +10,28 @@ package model.bean;
  * @author gabri
  */
 public class Cliente {
-   private int cpf; 
+   private String cpf; 
    private String nome;
-   private String tel;
+   private String telefone;
    private String email;
    private Endereco endereco;
 
     public Cliente() {
+    }  
+
+    public Cliente(String cpf, String nome, String telefone, String email, Endereco endereco) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -35,12 +43,12 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getTel() {
-        return tel;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getEmail() {
@@ -58,9 +66,7 @@ public class Cliente {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-   
     
-   
-   
+    
     
 }

@@ -10,22 +10,32 @@ package model.bean;
  * @author gabri
  */
 public class Fornecedor {
-   private int cnpj; 
+   private String cnpj; 
    private String rsocial;
    private String nfantasia;
    private String contato;
-   private String tel;
+   private String telefone;
    private String email;
    private Endereco endereco;
 
     public Fornecedor() {
     }
 
-    public int getCnpj() {
+    public Fornecedor(String cnpj, String rsocial, String nfantasia, String contato, String telefone, String email, Endereco endereco) {
+        this.cnpj = cnpj;
+        this.rsocial = rsocial;
+        this.nfantasia = nfantasia;
+        this.contato = contato;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+    }
+
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(int cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -53,12 +63,12 @@ public class Fornecedor {
         this.contato = contato;
     }
 
-    public String getTel() {
-        return tel;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getEmail() {
@@ -76,7 +86,8 @@ public class Fornecedor {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-   
-   
+    
+    
+    
    
 }

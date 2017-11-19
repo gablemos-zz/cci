@@ -10,28 +10,45 @@ package model.bean;
  * @author gabri
  */
 public class Endereco {
-    private int cep;
-    private String rua;
+    private String cep;
+    private String uf;
+    private String cidade;
     private String bairro;
-    private int número;
+    private String rua;
 
     public Endereco() {
     }
 
-    public int getCep() {
+    public Endereco(String cep, String uf, String cidade, String bairro, String rua) {
+        this.cep = cep;
+        this.uf = uf;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.rua = rua;
+    }
+
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
-    public String getRua() {
-        return rua;
+    public String getUf() {
+        return uf;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     public String getBairro() {
@@ -42,13 +59,14 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public int getNúmero() {
-        return número;
+    public String getRua() {
+        return rua;
     }
 
-    public void setNúmero(int número) {
-        this.número = número;
+    public void setRua(String rua) {
+        this.rua = rua;
     }
+    
     
     
     

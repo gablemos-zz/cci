@@ -10,7 +10,7 @@ package model.bean;
  * @author gabri
  */
 public class Funcionario {
-   private int cpf; 
+   private String cpf; 
    private String nome;
    private String tel;
    private String email;
@@ -20,11 +20,20 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    public int getCpf() {
+    public Funcionario(String cpf, String nome, String tel, String email, String cargo, Endereco endereco) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.tel = tel;
+        this.email = email;
+        this.cargo = cargo;
+        this.endereco = endereco;
+    }
+
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -67,8 +76,7 @@ public class Funcionario {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-   
-   
-   
+    
+    
     
 }
