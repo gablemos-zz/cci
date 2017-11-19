@@ -18,6 +18,14 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario(String usuario, String senha, Funcionario funcionario) {
+        this.usuario = usuario;
+        this.senha = senha;
+        this.funcionario = funcionario;
+    }
+    
+    
+
     public int getId() {
         return id;
     }

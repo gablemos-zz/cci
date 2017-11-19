@@ -17,6 +17,13 @@ public class PecaServico {
     public PecaServico() {
     }
 
+    public PecaServico(Peca peca, Servico servico) {
+        this.peca = peca;
+        this.servico = servico;
+    }
+    
+    
+
     public int getId() {
         return id;
     }

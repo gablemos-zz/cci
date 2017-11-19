@@ -25,6 +25,19 @@ public class Servico {
     public Servico() {
     }
 
+    public Servico(String descicao, Date data, Date hora, int tempo, double valor, Cliente cliente, Funcionario funcionario, Peca peca) {
+        this.descicao = descicao;
+        this.data = data;
+        this.hora = hora;
+        this.tempo = tempo;
+        this.valor = valor;
+        this.cliente = cliente;
+        this.funcionario = funcionario;
+        this.peca = peca;
+    }
+    
+    
+
     public int getId() {
         return id;
     }

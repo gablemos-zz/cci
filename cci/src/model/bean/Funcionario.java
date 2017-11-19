@@ -28,6 +28,14 @@ public class Funcionario {
         this.cargo = cargo;
         this.endereco = endereco;
     }
+    
+    public Funcionario(String cpf, String nome, String telefone, String email, String cargo) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.cargo = cargo;
+    }
 
     public String getCpf() {
         return cpf;
