@@ -14,8 +14,8 @@ import java.util.Date;
 public class Servico {
     private int id;
     private String descicao;
-    private Date data;
-    private Date hora;
+    private String data;
+    private String hora;
     private int tempo;
     private double valor;
     private Cliente cliente;
@@ -25,7 +25,7 @@ public class Servico {
     public Servico() {
     }
 
-    public Servico(String descicao, Date data, Date hora, int tempo, double valor, Cliente cliente, Funcionario funcionario, Peca peca) {
+    public Servico(String descicao, String data, String hora, int tempo, double valor, Cliente cliente, Funcionario funcionario, Peca peca) {
         this.descicao = descicao;
         this.data = data;
         this.hora = hora;
@@ -35,8 +35,6 @@ public class Servico {
         this.funcionario = funcionario;
         this.peca = peca;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -54,19 +52,19 @@ public class Servico {
         this.descicao = descicao;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public Date getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
