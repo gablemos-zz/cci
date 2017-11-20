@@ -132,4 +132,18 @@ public class UsuarioDAOTest {
         }
     }
     
+    @Test
+    public void logar(){
+        UsuarioDAO dao = new UsuarioDAO();
+        
+        String usuario = "123";
+        String senha = "12345";
+        
+        if(dao.validarLogin(usuario, senha)){
+            System.out.println("Logado");
+        }else{
+            System.out.println("Verifique o usuário e senha");
+        }
+    }
+    
 }

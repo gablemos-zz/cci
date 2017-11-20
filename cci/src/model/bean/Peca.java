@@ -19,6 +19,16 @@ public class Peca {
     public Peca() {
     }
 
+    public Peca(int id, String descricao, String unidade, double valor, Fornecedor fornecedor) {
+        this.id = id;
+        this.descricao = descricao;
+        this.unidade = unidade;
+        this.valor = valor;
+        this.fornecedor = fornecedor;
+    }
+    
+    
+
     public Peca(String descricao, String unidade, double valor, Fornecedor fornecedor) {
         this.descricao = descricao;
         this.unidade = unidade;

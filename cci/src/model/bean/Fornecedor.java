@@ -30,6 +30,15 @@ public class Fornecedor {
         this.email = email;
         this.endereco = endereco;
     }
+    
+    public Fornecedor(String cnpj, String rsocial, String nfantasia, String contato, String telefone, String email) {
+        this.cnpj = cnpj;
+        this.rsocial = rsocial;
+        this.nfantasia = nfantasia;
+        this.contato = contato;
+        this.telefone = telefone;
+        this.email = email;
+    }
 
     public String getCnpj() {
         return cnpj;

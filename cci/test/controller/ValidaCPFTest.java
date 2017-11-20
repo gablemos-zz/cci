@@ -23,7 +23,7 @@ public class ValidaCPFTest {
         if (ValidaCPF.isCPF(cpf) == true) {
             System.out.printf("CPF Válido !!!\n");
         } else {
-            System.out.printf("Erro, CPF invalido !!!\n");
+            fail("Erro, CPF invalido !!!\n");
         }
     }
     
@@ -33,7 +33,7 @@ public class ValidaCPFTest {
         if (ValidaCPF.isCPF(cpf) == true) {
             System.out.printf("CPF Válido !!!\n");
         } else {
-            System.out.printf("Erro, CPF invalido Grande !!!\n");
+            fail("Erro, CPF invalido Grande !!!\n");
         }
     }
     
@@ -43,7 +43,7 @@ public class ValidaCPFTest {
         if (ValidaCPF.isCPF(cpf) == true) {
             System.out.printf("CPF Válido !!!\n");
         } else {
-            System.out.printf("Erro, CPF invalido com letra!!!\n");
+            fail("Erro, CPF invalido com letra!!!\n");
         }
     }
     
@@ -53,7 +53,7 @@ public class ValidaCPFTest {
         if (ValidaCPF.isCPF(cpf) == true) {
             System.out.printf("CPF Válido !!!\n");
         } else {
-            System.out.printf("Erro, CPF invalido sequencial !!!\n");
+            fail("Erro, CPF invalido sequencial !!!\n");
         }
     }
     

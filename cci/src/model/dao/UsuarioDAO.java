@@ -185,6 +185,27 @@ public class UsuarioDAO {
         return usuarios;
     }  
     
+        public boolean validarLogin(String usuario, String senha){
+        con = ConnectionFactory.getConnection();
+        sql = "SELECT * FROM usuario WHERE usuario = ? AND senha = ?";
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, usuario);
+            stmt.setString(2, senha);
+            rs = stmt.executeQuery();            
+            return rs.first();
+            
+        } catch (SQLException ex) {
+            System.err.println("Erro: " + ex);
+            return false;
+        }finally{
+           ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+    }
     
     
 }

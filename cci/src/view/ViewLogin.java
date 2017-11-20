@@ -5,6 +5,11 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import model.dao.FornecedorDAO;
+import model.dao.PecaDAO;
+import model.dao.UsuarioDAO;
+
 /**
  *
  * @author gabri
@@ -63,6 +68,11 @@ public class ViewLogin extends javax.swing.JFrame {
         btnEntrar.setBackground(new java.awt.Color(158, 61, 0));
         btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
         btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -122,6 +132,16 @@ public class ViewLogin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        UsuarioDAO udao = new UsuarioDAO();
+        if(udao.validarLogin(txtUsuario.getText(), txtSenha.getText())){
+            new ViewMain().setVisible(true);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Verifique o usuário e senha");
+        }
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments

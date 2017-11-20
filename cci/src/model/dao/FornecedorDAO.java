@@ -12,35 +12,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.bean.Funcionario;
+import model.bean.Fornecedor;
 import model.bean.Endereco;
 
 /**
  *
  * @author gabri
  */
-public class FuncionarioDAO {
+public class FornecedorDAO {
 
     private String sql = "";
     private Connection con = null;
 
-    public FuncionarioDAO() {
+    public FornecedorDAO() {
     }
 
     //Método INSERT
-    public boolean salvar(Funcionario funcionario) {
+    public boolean salvar(Fornecedor fornecedor) {
         con = ConnectionFactory.getConnection();
-        sql = "INSERT INTO funcionario VALUES (?,?,?,?,?,?)";
+        sql = "INSERT INTO fornecedor VALUES (?,?,?,?,?,?,?)";
         PreparedStatement stmt = null;
 
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, funcionario.getCpf());
-            stmt.setString(2, funcionario.getNome());
-            stmt.setString(3, funcionario.getTelefone());
-            stmt.setString(4, funcionario.getEmail());
-            stmt.setString(5, funcionario.getCargo());
-            stmt.setString(6, funcionario.getEndereco().getCep());
+            stmt.setString(1, fornecedor.getCnpj());
+            stmt.setString(2, fornecedor.getRsocial());
+            stmt.setString(3, fornecedor.getNfantasia());
+            stmt.setString(4, fornecedor.getContato());
+            stmt.setString(5, fornecedor.getTelefone());
+            stmt.setString(6, fornecedor.getEmail());
+            stmt.setString(7, fornecedor.getEndereco().getCep());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -52,19 +53,20 @@ public class FuncionarioDAO {
     }
     
     // Udate 
-    public boolean alterar(Funcionario funcionario) {
+    public boolean alterar(Fornecedor fornecedor) {
         con = ConnectionFactory.getConnection();
-        sql = "UPDATE funcionario SET nome = ?, telefone = ?, email = ?, cargo = ?, endereco_cep = ? WHERE cpf = ?";
+        sql = "UPDATE fornecedor SET rsocial = ?, nfantasia = ?, contato = ?, telefone = ?, email = ?, endereco_cep = ? WHERE cnpj = ?";
         PreparedStatement stmt = null;
 
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, funcionario.getNome());
-            stmt.setString(2, funcionario.getTelefone());
-            stmt.setString(3, funcionario.getEmail());
-            stmt.setString(4, funcionario.getCargo());
-            stmt.setString(5, funcionario.getEndereco().getCep());            
-            stmt.setString(6, funcionario.getCpf());
+            stmt.setString(1, fornecedor.getRsocial());
+            stmt.setString(2, fornecedor.getNfantasia());
+            stmt.setString(3, fornecedor.getContato());
+            stmt.setString(4, fornecedor.getTelefone());
+            stmt.setString(5, fornecedor.getEmail());
+            stmt.setString(6, fornecedor.getEndereco().getCep());            
+            stmt.setString(7, fornecedor.getCnpj());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -76,15 +78,15 @@ public class FuncionarioDAO {
     }
     
     // TODO Delete
-    public boolean apagar(Funcionario funcionario){
-        sql = "DELETE FROM funcionario WHERE cpf = ?";
+    public boolean apagar(Fornecedor fornecedor){
+        sql = "DELETE FROM fornecedor WHERE cnpj = ?";
         con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, funcionario.getCpf());
+            stmt.setString(1, fornecedor.getCnpj());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -95,17 +97,17 @@ public class FuncionarioDAO {
         }
     }
     
-    //Método verifica se um funcionario já consta no bd
-    public boolean verificarExistencia(String cpf){
+    //Método verifica se um fornecedor já consta no bd
+    public boolean verificarExistencia(String cnpj){
         con = ConnectionFactory.getConnection();
-        sql = "SELECT cpf FROM funcionario WHERE cpf = ?";
+        sql = "SELECT cnpj FROM fornecedor WHERE cnpj = ?";
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, cpf);
+            stmt.setString(1, cnpj);
             rs = stmt.executeQuery();            
             return rs.first();
             
@@ -118,13 +120,13 @@ public class FuncionarioDAO {
     }
     
     //Método SELECT *
-    public List<Funcionario> buscarTodos(){        
+    public List<Fornecedor> buscarTodos(){        
         con = ConnectionFactory.getConnection();
-        sql = "SELECT * FROM funcionario f INNER JOIN endereco e ON e.cep = f.endereco_cep;";
+        sql = "SELECT * FROM fornecedor f INNER JOIN endereco e ON e.cep = f.endereco_cep;";
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Funcionario> funcionarios = new ArrayList<>();
+        List<Fornecedor> fornecedors = new ArrayList<>();
         
         try {
             stmt = con.prepareStatement(sql);
@@ -138,33 +140,34 @@ public class FuncionarioDAO {
                         rs.getString("rua"));
                 
                 
-                Funcionario funcionario = new Funcionario(
-                        rs.getString("cpf"),
-                        rs.getString("nome"),
-                        rs.getString("telefone"),
+                Fornecedor fornecedor = new Fornecedor(
+                        rs.getString("cnpj"),
+                        rs.getString("rsocial"),
+                        rs.getString("nfantasia"),
+                        rs.getString("contato"), 
+                        rs.getString("telefone"), 
                         rs.getString("email"), 
-                        rs.getString("cargo"), 
                         endereco);
                 
-                funcionarios.add(funcionario);
+                fornecedors.add(fornecedor);
             }
         } catch (SQLException ex) {
             System.err.println("Erro: " + ex);
         }finally{
            ConnectionFactory.closeConnection(con, stmt, rs);
         }        
-        return funcionarios;
+        return fornecedors;
     }
     
 
-    //Método buscar funcionario especifico
-    public List<Funcionario> buscarCPF(String cpf){        
+    //Método buscar fornecedor especifico
+    public List<Fornecedor> buscarCPF(String cpf){        
         con = ConnectionFactory.getConnection();
-        sql = "SELECT * FROM funcionario f INNER JOIN endereco e ON e.cep = f.endereco_cep WHERE f.cpf = ?;";
+        sql = "SELECT * FROM fornecedor f INNER JOIN endereco e ON e.cep = f.endereco_cep WHERE f.cnpj = ?;";
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Funcionario> funcionarios = new ArrayList<>();
+        List<Fornecedor> fornecedors = new ArrayList<>();
         
         try {
             stmt = con.prepareStatement(sql);
@@ -179,36 +182,38 @@ public class FuncionarioDAO {
                         rs.getString("rua"));
                 
                 
-                Funcionario funcionario = new Funcionario(
-                        rs.getString("cpf"),
-                        rs.getString("nome"),
-                        rs.getString("telefone"),
-                        rs.getString("email"),
-                        rs.getString("cargo"),
+                Fornecedor fornecedor = new Fornecedor(
+                        rs.getString("cnpj"),
+                        rs.getString("rsocial"),
+                        rs.getString("nfantasia"),
+                        rs.getString("contato"), 
+                        rs.getString("telefone"), 
+                        rs.getString("email"), 
                         endereco);
                 
-                funcionarios.add(funcionario);
+                fornecedors.add(fornecedor);
             }
         } catch (SQLException ex) {
             System.err.println("Erro: " + ex);
         }finally{
            ConnectionFactory.closeConnection(con, stmt, rs);
         }        
-        return funcionarios;
+        return fornecedors;
     }  
     
-    //Método buscar funcionarios pelo nome
-    public List<Funcionario> buscarNome(String nome){        
+    //Método buscar fornecedors pelo nome
+    public List<Fornecedor> buscarNome(String nome){        
         con = ConnectionFactory.getConnection();
-        sql = "SELECT * FROM funcionario f INNER JOIN endereco e ON e.cep = f.endereco_cep WHERE f.nome LIKE ?;";
+        sql = "SELECT * FROM fornecedor f INNER JOIN endereco e ON e.cep = f.endereco_cep WHERE (f.rsocial LIKE ? OR f.nfantasia LIKE ?);";
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Funcionario> funcionarios = new ArrayList<>();
+        List<Fornecedor> fornecedors = new ArrayList<>();
         
         try {
             stmt = con.prepareStatement(sql);
             stmt.setString(1, "%"+nome+"%");
+            stmt.setString(2, "%"+nome+"%");
             rs = stmt.executeQuery();
             
             while (rs.next()) {                
@@ -220,22 +225,23 @@ public class FuncionarioDAO {
                         rs.getString("rua"));
                 
                 
-                Funcionario funcionario = new Funcionario(
-                        rs.getString("cpf"),
-                        rs.getString("nome"),
-                        rs.getString("telefone"),
+                Fornecedor fornecedor = new Fornecedor(
+                        rs.getString("cnpj"),
+                        rs.getString("rsocial"),
+                        rs.getString("nfantasia"),
+                        rs.getString("contato"), 
+                        rs.getString("telefone"), 
                         rs.getString("email"), 
-                        rs.getString("cargo"),
                         endereco);
                 
-                funcionarios.add(funcionario);
+                fornecedors.add(fornecedor);
             }
         } catch (SQLException ex) {
             System.err.println("Erro: " + ex);
         }finally{
            ConnectionFactory.closeConnection(con, stmt, rs);
         }        
-        return funcionarios;
+        return fornecedors;
     }
     
 }
