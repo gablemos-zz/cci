@@ -17,6 +17,14 @@ public class PecaServico {
     public PecaServico() {
     }
 
+    public PecaServico(int id, Peca peca, Servico servico) {
+        this.id = id;
+        this.peca = peca;
+        this.servico = servico;
+    }
+    
+    
+
     public PecaServico(Peca peca, Servico servico) {
         this.peca = peca;
         this.servico = servico;

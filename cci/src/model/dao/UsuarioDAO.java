@@ -185,7 +185,7 @@ public class UsuarioDAO {
         return usuarios;
     }  
     
-        public boolean validarLogin(String usuario, String senha){
+    public boolean validarLogin(String usuario, String senha){
         con = ConnectionFactory.getConnection();
         sql = "SELECT * FROM usuario WHERE usuario = ? AND senha = ?";
         
@@ -206,6 +206,42 @@ public class UsuarioDAO {
            ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+    
+    public String retornaCargo(String user, String senha){        
+        con = ConnectionFactory.getConnection();
+        sql = "SELECT * FROM usuario u INNER JOIN funcionario f ON f.cpf = u.funcionario_cpf WHERE u.usuario = ? AND u.senha = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, user);
+            stmt.setString(2, senha);
+            rs = stmt.executeQuery();
+            while (rs.next()) {                
+                Funcionario funcionario = new Funcionario(
+                        rs.getString("cpf"), 
+                        rs.getString("nome"), 
+                        rs.getString("telefone"), 
+                        rs.getString("email"), 
+                        rs.getString("cargo"));
+                
+                
+                Usuario usuario = new Usuario(
+                        rs.getString("usuario"),
+                        rs.getString("senha"), 
+                        funcionario);
+                
+                return usuario.getFuncionario().getCargo();
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro: " + ex);
+        }finally{
+           ConnectionFactory.closeConnection(con, stmt, rs);
+        }        
+        return "";
+    }  
     
     
 }

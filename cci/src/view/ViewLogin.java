@@ -135,9 +135,13 @@ public class ViewLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         UsuarioDAO udao = new UsuarioDAO();
-        if(udao.validarLogin(txtUsuario.getText(), txtSenha.getText())){
-            new ViewMain().setVisible(true);
-            this.dispose();
+        String nivelUser = udao.retornaCargo(txtUsuario.getText(), txtSenha.getText());
+        if(nivelUser.equals("Gerente")){                            
+                new ViewMain().setVisible(true);
+                this.dispose();
+        }else if(nivelUser.equals("Atendente")){               
+                new ViewMainAtendimento().setVisible(true);
+                this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Verifique o usuário e senha");
         }

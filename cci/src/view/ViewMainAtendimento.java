@@ -15,12 +15,12 @@ import model.dao.ServicoDAO;
  *
  * @author gabri
  */
-public class ViewMain extends javax.swing.JFrame {
+public class ViewMainAtendimento extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewMain
      */
-    public ViewMain() {
+    public ViewMainAtendimento() {
         initComponents();
         
         DefaultTableModel modelo = (DefaultTableModel) jtClientes.getModel();
@@ -63,14 +63,11 @@ public class ViewMain extends javax.swing.JFrame {
         lblCCpf = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
-        btnFuncionario = new javax.swing.JButton();
         btnFornecedor = new javax.swing.JButton();
         btnPeca = new javax.swing.JButton();
-        btnUsuario = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtClientes = new javax.swing.JTable();
-        btnUsuario1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,15 +147,6 @@ public class ViewMain extends javax.swing.JFrame {
             }
         });
 
-        btnFuncionario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Funcionario_60px.png"))); // NOI18N
-        btnFuncionario.setText("Funcionário");
-        btnFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFuncionarioActionPerformed(evt);
-            }
-        });
-
         btnFornecedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Fornecedor_60px.png"))); // NOI18N
         btnFornecedor.setText("Fornecedor");
@@ -174,15 +162,6 @@ public class ViewMain extends javax.swing.JFrame {
         btnPeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPecaActionPerformed(evt);
-            }
-        });
-
-        btnUsuario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Usuario_60px.png"))); // NOI18N
-        btnUsuario.setText("Usuário");
-        btnUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuarioActionPerformed(evt);
             }
         });
 
@@ -220,15 +199,6 @@ public class ViewMain extends javax.swing.JFrame {
             .addComponent(jScrollPane1)
         );
 
-        btnUsuario1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnUsuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Relatorio_60px.png"))); // NOI18N
-        btnUsuario1.setText("Faturamento");
-        btnUsuario1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuario1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -238,11 +208,8 @@ public class ViewMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPeca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUsuario1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -256,15 +223,9 @@ public class ViewMain extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPeca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUsuario1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -293,10 +254,6 @@ public class ViewMain extends javax.swing.JFrame {
         new ViewCliente().setVisible(true);
     }//GEN-LAST:event_btnClienteActionPerformed
 
-    private void btnFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionarioActionPerformed
-        new ViewFuncionario().setVisible(true);
-    }//GEN-LAST:event_btnFuncionarioActionPerformed
-
     private void btnPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPecaActionPerformed
         new ViewPeca().setVisible(true);
     }//GEN-LAST:event_btnPecaActionPerformed
@@ -304,14 +261,6 @@ public class ViewMain extends javax.swing.JFrame {
     private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
         new ViewFornecedor().setVisible(true);
     }//GEN-LAST:event_btnFornecedorActionPerformed
-
-    private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
-        new ViewUsuario().setVisible(true);
-    }//GEN-LAST:event_btnUsuarioActionPerformed
-
-    private void btnUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUsuario1ActionPerformed
 
     private void jtClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtClientesMouseClicked
         if (evt.getClickCount() == 2) {
@@ -352,20 +301,21 @@ public class ViewMain extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewMainAtendimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewMainAtendimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewMainAtendimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewMainAtendimento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewMain().setVisible(true);
+                new ViewMainAtendimento().setVisible(true);
             }
         });
     }
@@ -373,10 +323,7 @@ public class ViewMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnFornecedor;
-    private javax.swing.JButton btnFuncionario;
     private javax.swing.JButton btnPeca;
-    private javax.swing.JButton btnUsuario;
-    private javax.swing.JButton btnUsuario1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;

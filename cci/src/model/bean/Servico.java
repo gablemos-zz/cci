@@ -18,14 +18,37 @@ public class Servico {
     private String hora;
     private int tempo;
     private double valor;
+    private String status;
     private Cliente cliente;
     private Funcionario funcionario;
-    private Peca peca;
 
     public Servico() {
     }
 
-    public Servico(String descicao, String data, String hora, int tempo, double valor, Cliente cliente, Funcionario funcionario, Peca peca) {
+    public Servico(int id, String descicao, String data, String hora, int tempo, double valor, String status, Cliente cliente, Funcionario funcionario) {
+        this.id = id;
+        this.descicao = descicao;
+        this.data = data;
+        this.hora = hora;
+        this.tempo = tempo;
+        this.valor = valor;
+        this.status = status;
+        this.cliente = cliente;
+        this.funcionario = funcionario;
+    }
+    
+    public Servico(int id, String descicao, String data, String hora, int tempo, double valor, String status) {
+        this.id = id;
+        this.descicao = descicao;
+        this.data = data;
+        this.hora = hora;
+        this.tempo = tempo;
+        this.valor = valor;
+        this.status = status;
+    }
+    
+    public Servico(int id, String descicao, String data, String hora, int tempo, double valor, Cliente cliente, Funcionario funcionario) {
+        this.id = id;
         this.descicao = descicao;
         this.data = data;
         this.hora = hora;
@@ -33,8 +56,20 @@ public class Servico {
         this.valor = valor;
         this.cliente = cliente;
         this.funcionario = funcionario;
-        this.peca = peca;
     }
+
+    public Servico(String descicao, String data, String hora, int tempo, double valor, String status, Cliente cliente, Funcionario funcionario) {
+        this.descicao = descicao;
+        this.data = data;
+        this.hora = hora;
+        this.tempo = tempo;
+        this.valor = valor;
+        this.status = status;
+        this.cliente = cliente;
+        this.funcionario = funcionario;
+    }
+
+    
 
     public int getId() {
         return id;
@@ -84,6 +119,14 @@ public class Servico {
         this.valor = valor;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }  
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -98,14 +141,6 @@ public class Servico {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
-    }
-
-    public Peca getPeca() {
-        return peca;
-    }
-
-    public void setPeca(Peca peca) {
-        this.peca = peca;
     }
     
     
